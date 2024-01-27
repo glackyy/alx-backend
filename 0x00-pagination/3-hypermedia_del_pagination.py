@@ -46,3 +46,12 @@ class Server:
         assert 0 <= index < data_len
         response = {}
         data = []
+        response['index'] = index
+        for i in range(page_size):
+            while True:
+                current = dataset.get(index)
+                index += 1
+                if current is not None:
+                    break
+            data.append(current)
+        response['data'] = data
