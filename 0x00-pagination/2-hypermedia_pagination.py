@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Class with Methods to create simple pagination from csv data"""
 import csv
 from typing import List
