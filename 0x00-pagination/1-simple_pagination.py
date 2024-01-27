@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Class Server that paginates a db"""
 import math
 import csv
