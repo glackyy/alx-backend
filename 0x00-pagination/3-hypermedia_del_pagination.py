@@ -55,3 +55,10 @@ class Server:
                     break
             data.append(current)
         response['data'] = data
+        response['page_size'] = len(data)
+        if dataset.get(index):
+            response['next_index'] = index
+        else:
+            response['next_index'] = None
+
+        return response
