@@ -4,7 +4,7 @@
 from base_caching import BaseCaching
 
 
-class BaseCaching(BaseCaching):
+class BasicCache(BaseCaching):
     """ BaseCaching defines: a class for caching information
     in key-value pairs
     """
