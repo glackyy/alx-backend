@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """ BaseCaching module
 """
-from  base_caching import BaseCaching
+from base_caching import BaseCaching
+
 
 class BaseCaching(BaseCaching):
     """ BaseCaching defines: a class for caching information
