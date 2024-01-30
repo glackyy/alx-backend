@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ BaseCaching module
 """
-from base_caching import BaseCaching
 
-
-class BaseCaching(BaseCaching):
+class BaseCaching():
     """ BaseCaching defines:
       - constants of your caching system
       - where your data are stored (in a dictionary)
@@ -22,3 +20,13 @@ class BaseCaching(BaseCaching):
         print("Current cache:")
         for key in sorted(self.cache_data.keys()):
             print("{}: {}".format(key, self.cache_data.get(key)))
+
+    def put(self, key, item):
+        """ Add an item in the cache
+        """
+        raise NotImplementedError("put must be implemented in your cache class")
+
+    def get(self, key):
+        """ Get an item by key
+        """
+        raise NotImplementedError("get must be implemented in your cache class")
