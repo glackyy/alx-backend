@@ -9,7 +9,7 @@ class BaseCaching(BaseCaching):
     in key-value pairs
     """
     def __init__(self):
-        """ Initiliaze
+        """ Initiliazing the class using the parent class __init__
         """
         BaseCaching.__init__(self)
 
