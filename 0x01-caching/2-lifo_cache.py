@@ -18,10 +18,10 @@ class LIFOCache(BaseCaching):
             leng = len(self.cache_data)
             if leng >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
                 print("DISCARD: {}".format(self.order[-1]))
-                def self.cache_data[self.order[-1]]
+                del self.cache_data[self.order[-1]]
                 del self.order[-1]
             if key in self.order:
-                def self.order[self.order.index(key)]
+                del self.order[self.order.index(key)]
             self.order.append(key)
             self.cache_data[key] = item
 
