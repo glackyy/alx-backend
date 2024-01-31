@@ -31,4 +31,16 @@ class LFUCache(BaseCaching):
                     disc = self.usage[disc]
                 else:
                     disc = lfu_k[0]
-                
+
+                print("DISCARD: {}".format(disc))
+                del self.cache_data[disc]
+                del self.usage[self.usage.index(disc)]
+                del self.frequency[disc]
+            if key in self.frequency:
+                self.frequency[key] += 1
+            else:
+                self.frequency[key] = 1
+            if key in self.usage:
+                del self.usage[self.usage.index(key)]
+            self.usage.append(key)
+            self.cache_data[key] = item
