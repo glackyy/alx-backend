@@ -44,3 +44,12 @@ class LFUCache(BaseCaching):
                 del self.usage[self.usage.index(key)]
             self.usage.append(key)
             self.cache_data[key] = item
+
+    def get(self, key):
+        """Returning the value linked to a given key, or None"""
+        if key is not None and key in self.cache_data.keys():
+            del self.usage[self.usage.index(key)]
+            self.usage.append(key)
+            self.frequency[key] += 1
+            return self.cache_data[key]
+        return None
