@@ -71,6 +71,25 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+@babel.timezoneselector
+def get_timezone():
+    """Selecting and Returning appropriate timezone"""
+    timez = request.args.get('timezone', None)
+    if timez:
+        try:
+            return timezone(timez).zone
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    if g.user:
+        try:
+            timez = g.user.get('timezone')
+            return timezone(timez).zone
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    dft = app.config['BABEL_DEFAULT_TIMEZONE']
+    return dft
+
+
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """Handling route"""
