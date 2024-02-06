@@ -7,6 +7,10 @@ from flask import (
     g
 )
 from flask_babel import Babel
+from typing import (
+    Union,
+    Dict
+)
 
 
 class Config(object):
@@ -27,6 +31,22 @@ users = {
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
+
+
+def get_user() -> Union[Dict, None]:
+    """Returning a User dict or None if ID can't be found
+    or Login_as was not found"""
+    id = request.args.get('login_as', None)
+    if id and int(id) in users.keys():
+        return users.get(int(id))
+    return None
+
+
+@app.before_request
+def before_request():
+    """Adding user to flask.g if user is found"""
+    user = get_user()
+    g.user = user
 
 
 @app.route('/', strict_slashes=False)
