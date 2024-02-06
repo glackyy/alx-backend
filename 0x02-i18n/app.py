@@ -69,3 +69,13 @@ def get_locale():
     if loc in app.config['LANGUAGES']:
         return loc
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+@app.route('/', strict_slashes=False)
+def index() -> str:
+    """Handling route"""
+    return render_template('7-index.html')
+
+
+if __name__ == "__main__":
+    app.run(port="5000", host="0.0.0.0", debug=True)
