@@ -29,6 +29,14 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
+def get_user():
+    """Returning a user dict or None if ID value can't be found
+    or if login_as was not found"""
+    id =  request.args.get('login_as', None)
+    if id is not None and int(id) in users.keys():
+        return users.get(int(id))
+    return None
+
 @babel.localeselector
 def get_locale():
     """Selecting and returning best language match based
