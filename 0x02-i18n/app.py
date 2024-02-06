@@ -39,10 +39,8 @@ users = {
 
 
 def get_user() -> Union[Dict, None]:
-    """
-    Returns a user dictionary or None if ID value can't be found
-    or if 'login_as' URL parameter was not found
-    """
+    """Returning a user Dict or none if ID can't be found
+    or login_as was not found"""
     id = request.args.get('login_as', None)
     if id and int(id) in users.keys():
         return users.get(int(id))
