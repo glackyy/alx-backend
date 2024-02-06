@@ -37,6 +37,14 @@ def get_user():
         return users.get(int(id))
     return None
 
+
+@app.before_request
+def before_request():
+    """Adding user to flask.g if user is found"""
+    user = get_user()
+    g.user = user
+
+
 @babel.localeselector
 def get_locale():
     """Selecting and returning best language match based
