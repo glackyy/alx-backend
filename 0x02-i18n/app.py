@@ -7,9 +7,11 @@ from flask import (
     g
 )
 from flask_babel import Babel
+from datetime import datetime
 from datetime import timezone as tzone
 from pytz import timezone
 import pytz.exceptions
+import locale
 from typing import (
     Union,
     Dict
@@ -52,6 +54,11 @@ def before_request():
     """Adding User to flask.g if user is found"""
     user = get_user()
     g.user = user
+    t_now = pytz.utc.localize(datetime.utcnow())
+    time = t_now.astimezone(timezone(get_timezone()))
+    locale.setlocale(locale.LC_TIME, (get_locale(), 'UTF-8'))
+    fm = "%b %d, %Y %I:%M:%S %p"
+    g.time = time.strftime(fm)
 
 
 @babel.localeselector
