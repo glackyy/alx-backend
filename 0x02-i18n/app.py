@@ -45,3 +45,10 @@ def get_user() -> Union[Dict, None]:
     if id and int(id) in users.keys():
         return users.get(int(id))
     return None
+
+
+@app.before_request
+def before_request():
+    """Adding User to flask.g if user is found"""
+    user = get_user()
+    g.user = user
