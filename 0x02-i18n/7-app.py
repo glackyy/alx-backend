@@ -7,6 +7,9 @@ from flask import (
     g
 )
 from flask_babel import Babel
+from datetime import timezone as tzone
+from pytz import timezone
+import pytz.exceptions
 from typing import (
     Union,
     Dict
@@ -64,6 +67,25 @@ def get_locale():
     if loc in app.config['LANGUAGES']:
         return loc
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+@babel.timezoneselector
+def get_timezone():
+    """Selecting and Returning appropriate timezone"""
+    timez = request.args.get('timezone', None)
+    if timez:
+        try:
+            return timezone(timez).zone
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    if g.user:
+        try:
+            timez = g.user.get('timezone')
+            return timezone(timez).zone
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    dft = app.config['BABEL_DEFAULT_TIMEZONE']
+    return dft
 
 
 @app.route('/', strict_slashes=False)
