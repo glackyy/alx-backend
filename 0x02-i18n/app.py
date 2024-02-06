@@ -36,3 +36,14 @@ users = {
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
+
+
+def get_user() -> Union[Dict, None]:
+    """
+    Returns a user dictionary or None if ID value can't be found
+    or if 'login_as' URL parameter was not found
+    """
+    id = request.args.get('login_as', None)
+    if id and int(id) in users.keys():
+        return users.get(int(id))
+    return None
