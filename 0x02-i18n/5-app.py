@@ -6,7 +6,7 @@ from flask import (
     request,
     g
 )
-from flask_label import Babel
+from flask_babel import Babel
 
 
 users = {
@@ -32,7 +32,7 @@ babel = Babel(app)
 def get_user():
     """Returning a user dict or None if ID value can't be found
     or if login_as was not found"""
-    id =  request.args.get('login_as', None)
+    id = request.args.get('login_as', None)
     if id is not None and int(id) in users.keys():
         return users.get(int(id))
     return None
