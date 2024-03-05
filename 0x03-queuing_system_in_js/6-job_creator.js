@@ -3,7 +3,7 @@ import { createQueue } from 'kue';
 const queue = createQueue();
 
 const notif = {
-  'phoneNumber': '0123456789',
+  'phoneNumber': '4153518780',
   'message': 'Code to verify your account'
 }
 
