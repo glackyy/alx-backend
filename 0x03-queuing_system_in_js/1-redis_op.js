@@ -9,4 +9,8 @@ function redisConnect() {
   });
 };
 
+function setNewSchool(schoolName, value) {
+  client.set(schoolName, value, print);
+};
+
 redisConnect();
