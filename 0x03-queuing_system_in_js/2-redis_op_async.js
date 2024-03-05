@@ -4,6 +4,7 @@ import { createClient, print } from 'redis';
 import { promisify } from 'util';
 
 const client = createClient();
+
 function redisConnect() {
   client.on('connect', function() {
     console.log('Redis client connected to the server');
