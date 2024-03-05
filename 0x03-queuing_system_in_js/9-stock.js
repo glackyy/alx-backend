@@ -21,3 +21,11 @@ const listProducts = [
   {'itemId': 3, 'itemName': 'Suitcase 650', 'price': 350, 'initialAvailableQuantity': 2},
   {'itemId': 4, 'itemName': 'Suitcase 1050', 'price': 550, 'initialAvailableQuantity': 5}
 ];
+
+function getItemById(id) {
+  return listProducts.filter((item) => item.itemId === id)[0];
+}
+
+function reserveStockbyid(itemId, stock) {
+  rdClient.set(itemId, stock);
+}
