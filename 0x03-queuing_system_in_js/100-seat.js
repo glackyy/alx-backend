@@ -67,3 +67,10 @@ app.get('/process', function (req, res) {
     }
   });
 });
+
+const port = 1245;
+app.listen(port, () => {
+  console.log(`app is listening http://localhost:${port}`);
+});
+
+reserveSeat(50);
