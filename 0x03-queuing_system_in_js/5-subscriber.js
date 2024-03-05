@@ -7,13 +7,13 @@ rdClient.on('connect', function () {
 });
 
 rdClient.on('error', function (error) {
-  console.log('Redis client not connected to the server: ${error}');
+  console.log(`Redis client not connected to the server: ${error}`);
 });
 
 rdClient.subscribe('holberton school channel');
 
 rdClient.on('message', function (channel, message) {
-  console.log('${message}');
+  console.log(`${message}`);
   if (message === 'KILL_SERVER') {
     rdClient.unsubscribe('holberton school channel');
     rdClient.end(true);
