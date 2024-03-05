@@ -42,6 +42,14 @@ app.get('/reserve_seat', function (req, res) {
     if (error) {
       res.json({"status": "Reservation failed"});
       return;
+    } else {
+      res.json({"status": "Reservation in process"});
+      job.on('complete', function () {
+        console.log(`Seat reservation job ${job.id} completed`);
+      });
+      job.on('failed', function(error) {
+        console.log(`Seat reservation job ${job.id} failed: ${error}`);
+      });
     }
-  })
-})
+  });
+});
