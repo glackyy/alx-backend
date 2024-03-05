@@ -53,3 +53,13 @@ app.get('/reserve_seat', function (req, res) {
     }
   });
 });
+
+app.get('/process', function (req, res) {
+  res.json({"status": "Queue processing"});
+  queue.process('reserve_seat', async function(job, done) {
+    const seat = Number(await getCurrentAvailableSeats());
+    if (seat === 0) {
+      reservationEnabled = false;
+    } 
+  })
+})
