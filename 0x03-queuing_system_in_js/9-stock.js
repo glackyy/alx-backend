@@ -38,3 +38,21 @@ async function getCurrentReservedStockById(itemId) {
 app.get('/list_products', function (req, res) {
   res.json(listProducts);
 });
+
+app.get('/list_products/:itemId', async function (req, res) {
+  const itemId = req.params.itemId;
+  const item = getItemById(parseInt(itemId));
+  if (item) {
+    const stock = await getCurrentReservedStockById(itemId);
+    const resItem = {
+      itemId: item.itemId,
+      itemName: item.itemName,
+      price: item.price,
+      initialAvailableQuantity: item.initialAvailableQuantity,
+      currentQuantity: stock !== null ? parseInt(stock) : item.initialAvailableQuantity,
+    };
+    res.json(resItem);
+  } else {
+    res.json({"status": "Product not found"});
+  }
+});
