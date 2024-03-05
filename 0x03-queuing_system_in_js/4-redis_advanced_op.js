@@ -6,7 +6,7 @@ rdClient.on('connect', function() {
   console.log('Redis client connected to the server');
 });
 rdClient.on('error', function(error) {
-  console.log('Redis client not connected to the server: ${error}');
+  console.log(`Redis client not connected to the server: ${error}`);
 });
 
 rdClient.hset('HolbertonSchools', 'Portland', '50', print);
