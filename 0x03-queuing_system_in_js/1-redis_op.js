@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import { createClient, print } from 'redis';
 
 function redisConnect() {
   const client = createClient();
@@ -12,5 +12,15 @@ function redisConnect() {
 function setNewSchool(schoolName, value) {
   client.set(schoolName, value, print);
 };
+
+function displaySchoolValue(schoolName) {
+  client.get(schoolName, function(error, res) {
+    if (error) {
+        console.log(error);
+        throw error;
+    }
+    console.log(res);
+  });
+}
 
 redisConnect();
