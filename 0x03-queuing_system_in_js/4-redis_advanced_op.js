@@ -15,3 +15,11 @@ rdClient.hset('HolbertonSchools', 'New York', '20', print);
 rdClient.hset('HolbertonSchools', 'Bogota', '20', print);
 rdClient.hset('HolbertonSchools', 'Cali', '40', print);
 rdClient.hset('HolbertonSchools', 'Paris', '2', print);
+
+rdClient.hgetall('HolbertonSchools', function (error, res) {
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+  console.log(res);
+});
