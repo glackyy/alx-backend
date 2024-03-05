@@ -26,7 +26,7 @@ function getItemById(id) {
   return listProducts.filter((item) => item.itemId === id)[0];
 }
 
-function reserveStockbyid(itemId, stock) {
+function reserveStockbyId(itemId, stock) {
   rdClient.set(itemId, stock);
 }
 
@@ -54,5 +54,28 @@ app.get('/list_products/:itemId', async function (req, res) {
     res.json(resItem);
   } else {
     res.json({"status": "Product not found"});
+  }
+});
+
+app.get('/reserve_product/:itemId', async function (req, res) {
+  const itemId = req.params.itemId;
+  const item = getItemById(parseInt(itemId));
+  if (!item) {
+    res.json({"status": "Product not found"});
+    return;
+  }
+
+  let currentStock = await getCurrentReservedStockById(itemId);
+  if (currentStock !== null) {
+    currentStock = parseInt(currentStock);
+    if (currentStock > 0) {
+      reserveStockbyId(itemId, currentStock - 1);
+      res.json({"status": "Reservation confirmed", "itemId": itemId});
+    } else {
+      res.json({"status": "Not enough stock available", "itemId": itemId});
+    }
+  } else {
+    reserveStockbyId(itemId, item.initialAvailableQuantity - 1);
+    res.json({"status": "Reservation confirmed", "itemId": itemId});
   }
 });
