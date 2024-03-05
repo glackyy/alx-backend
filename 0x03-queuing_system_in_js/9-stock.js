@@ -29,3 +29,12 @@ function getItemById(id) {
 function reserveStockbyid(itemId, stock) {
   rdClient.set(itemId, stock);
 }
+
+async function getCurrentReservedStockById(itemId) {
+  const stock = await get(itemId);
+  return stock;
+}
+
+app.get('/list_products', function (req, res) {
+  res.json(listProducts);
+});
