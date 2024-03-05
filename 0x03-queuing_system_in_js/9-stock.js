@@ -79,3 +79,8 @@ app.get('/reserve_product/:itemId', async function (req, res) {
     res.json({"status": "Reservation confirmed", "itemId": itemId});
   }
 });
+
+const port = 1245;
+app.listen(port, () => {
+  console.log(`app listening at http://localhost:${port}`);
+});
